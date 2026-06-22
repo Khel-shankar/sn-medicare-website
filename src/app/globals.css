@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050508;
+  --foreground: #f5f5f5;
+  --kivo-cyan: #00b4f5;
+  --kivo-cyan-dark: #0090c8;
+  --kivo-orange: #ff6b2b;
+  --kivo-plus: #00d4aa;
+  --surface: #0f1117;
+  --surface-elevated: #161b26;
+  --border: rgba(0, 180, 245, 0.15);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-kivo-cyan: var(--kivo-cyan);
+  --color-kivo-cyan-dark: var(--kivo-cyan-dark);
+  --color-kivo-orange: var(--kivo-orange);
+  --color-kivo-plus: var(--kivo-plus);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --font-sans: var(--font-outfit);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(0, 180, 245, 0.35);
+  color: #fff;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #00b4f5 0%, #00d4ff 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-indian {
+  background: linear-gradient(90deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-glow {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    rgba(0, 180, 245, 0.18) 0%,
+    transparent 70%
+  );
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 40px rgba(0, 180, 245, 0.12);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00b4f5 0%, #0090c8 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 180, 245, 0.35);
+}
+
+.btn-outline {
+  border: 1.5px solid rgba(0, 180, 245, 0.5);
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(0, 180, 245, 0.1);
+  border-color: #00b4f5;
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 180, 245, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 180, 245, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 180, 245, 0.4);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
 }
