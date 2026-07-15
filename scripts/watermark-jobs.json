@@ -1,0 +1,30 @@
+[
+  {
+    "in": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/original-from-github-hero.png",
+    "out": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/clean-hero.png"
+  },
+  {
+    "in": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/original-from-github-flyer.png",
+    "out": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/clean-flyer.png"
+  },
+  {
+    "in": "C:/Users/Dell/sn-medicare-website/public/images/kivo-pro-product.png",
+    "out": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/clean-pro-product.png"
+  },
+  {
+    "in": "C:/Users/Dell/sn-medicare-website/public/images/kivo-plus-hero.png",
+    "out": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/clean-plus-hero.png"
+  },
+  {
+    "in": "C:/Users/Dell/sn-medicare-website/public/images/kivo-plus-product.png",
+    "out": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/clean-plus-product.png"
+  },
+  {
+    "in": "C:/Users/Dell/sn-medicare-website/public/images/kivo-plus-flyer.png",
+    "out": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/clean-plus-flyer.png"
+  },
+  {
+    "in": "C:/Users/Dell/sn-medicare-website/public/images/kivo-plus-lifestyle.png",
+    "out": "C:/Users/Dell/sn-medicare-website/public/images/_backup_before_restore/clean-plus-lifestyle.png"
+  }
+]
