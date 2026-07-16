@@ -103,7 +103,7 @@ export default function AboutPage() {
           </div>
           <div className="relative">
             <Image
-              src="/images/about-clinic.webp"
+              src="/images/about-clinic.png"
               alt="Kivo Pro applied in a performance & recovery clinic"
               width={560}
               height={700}

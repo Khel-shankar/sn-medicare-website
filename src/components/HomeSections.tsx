@@ -110,7 +110,7 @@ export default function HeroSection() {
             <div className="relative animate-float">
               <div className="absolute -inset-4 rounded-3xl bg-kivo-cyan/10 blur-3xl animate-pulse-glow" />
               <Image
-                src="/images/kivo-pro-hero.webp"
+                src="/images/kivo-pro-hero.png"
                 alt="Kivo Pro Kinesiology Tape"
                 width={600}
                 height={540}
@@ -260,7 +260,7 @@ export function WhyChooseSection() {
             className="relative"
           >
             <Image
-              src="/images/kivo-pro-flyer.webp"
+              src="/images/kivo-pro-flyer.png"
               alt="Kivo Pro Features"
               width={450}
               height={980}

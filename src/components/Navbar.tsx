@@ -24,7 +24,7 @@ export default function Navbar() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/images/kivo-header-logo.webp"
+              src="/images/kivo-header-logo.png"
               alt="KIVO — Engineered for Motion"
               width={280}
               height={120}

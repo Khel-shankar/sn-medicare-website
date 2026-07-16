@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "S.N. Medicare | Sweatproof Kinesiology Tape for Indian Athletes",
     description:
       "Medical grade sports therapy. Kivo Pro & Kivo Plus — engineered for motion.",
-    images: ["/images/kivo-pro-hero.webp"],
+    images: ["/images/kivo-pro-hero.png"],
   },
 };
 
