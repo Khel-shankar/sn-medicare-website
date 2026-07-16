@@ -43,8 +43,13 @@ export const products: Product[] = [
       "/images/kivo-pro-hero-prev.png",
       "/images/kivo-pro-flyer-prev.png",
       "/images/kivo-pro-specs.png",
+      "/images/kivo-pro-hero-new.png",
+      "/images/kivo-pro-flyer-new.png",
     ],
-    videos: ["/videos/kivo-pro-demo.mp4"],
+    videos: [
+      "/videos/kivo-pro-demo.mp4",
+      "/videos/kivo-pro-reel.mp4",
+    ],
     accentColor: "#00b4f5",
     badge: "Bestseller",
     features: [
