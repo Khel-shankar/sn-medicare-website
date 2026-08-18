@@ -57,8 +57,15 @@ Edit `src/data/products.ts` — add a new product object following the existing 
 
 1. Push code to GitHub
 2. Import project on [vercel.com](https://vercel.com)
-3. Add environment variables: `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`
+3. Add environment variables: `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, plus Supabase/admin vars from `.env.example`
 4. Deploy
+
+### Founder admin dashboard
+
+After Supabase setup (see `ADMIN-DASHBOARD.md`):
+
+- Login: `/admin/login` (email or phone OTP)
+- Orders: `/admin`
 
 ### Other hosts
 

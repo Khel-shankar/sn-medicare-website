@@ -246,6 +246,7 @@ export default function CheckoutPage() {
               customer: form,
               items,
               totalPrice: data.finalTotal,
+              subtotal: data.subtotal,
               promoCode: data.promoCode,
               discount: data.discount,
             }),

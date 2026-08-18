@@ -10,7 +10,7 @@ export interface TeamMember {
 
 export const teamMembers: TeamMember[] = [
   {
-    name: "Satvik Nandwani",
+    name: "Dr. Satvik Nandwani",
     role: "Founder",
     designation: "Founder | S.N. Medicare",
     featured: "founder",
@@ -20,7 +20,7 @@ export const teamMembers: TeamMember[] = [
       "I founded S.N. Medicare with one belief — Indian athletes deserve medical-grade sports therapy products that actually perform in our climate. Every Kivo product is built so you can train harder, recover smarter, and move with confidence.",
   },
   {
-    name: "Abhinav Soni",
+    name: "Dr.Abhinav Soni",
     role: "Co-Founder",
     designation: "Co-Founder | Founder, PhysioKnowledge",
     featured: "cofounder",
@@ -38,7 +38,7 @@ export const teamMembers: TeamMember[] = [
     image: "/images/team/lakshya-rankawat.jpg",
   },
   {
-    name: "Naitik",
+    name: "Naitik Nandwani",
     role: "Product Manager",
     designation: "Product Manager",
     featured: "team",
@@ -58,8 +58,8 @@ export const teamMembers: TeamMember[] = [
 export const contactInfo = {
   email: "info@snmedicare.in",
   phones: [
-    { label: "Satvik Nandwani", number: "+91 70149 49153", tel: "+917014949153" },
-    { label: "Abhinav Soni", number: "+91 86196 37298", tel: "+918619637298" },
+    { label: "Dr. Satvik Nandwani", number: "+91 70149 49153", tel: "+917014949153" },
+    { label: "Dr. Abhinav Soni", number: "+91 86196 37298", tel: "+918619637298" },
   ],
   whatsapp: {
     number: "+91 72970 49153",

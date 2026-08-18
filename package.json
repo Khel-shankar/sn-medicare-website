@@ -11,7 +11,9 @@
     "clean:watermarks": "node scripts/remove-gemini-stars.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
     "framer-motion": "^12.40.0",
+    "jose": "^6.2.9",
     "lucide-react": "^1.21.0",
     "next": "16.2.9",
     "razorpay": "^2.9.6",
