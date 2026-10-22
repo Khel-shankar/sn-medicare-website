@@ -21,21 +21,40 @@ function cleanEnvVal(val: string | undefined): string {
   return s;
 }
 
+function getSupabaseUrl(): string {
+  const envUrl = cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL);
+  if (envUrl && !envUrl.includes("xxxx.supabase.co")) {
+    return envUrl.replace(/\/$/, "");
+  }
+  return "https://taywtlmjyjjirnkpucfm.supabase.co";
+}
+
+function getSupabaseKey(): string {
+  const envKey = cleanEnvVal(process.env.SUPABASE_SERVICE_ROLE_KEY);
+  if (envKey && !envKey.startsWith("eyJhbGciOi...") && !envKey.includes("xxxxx")) {
+    return envKey;
+  }
+  return "";
+}
+
 export function isSupabaseConfigured(): boolean {
-  return Boolean(
-    cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
-      cleanEnvVal(process.env.SUPABASE_SERVICE_ROLE_KEY)
-  );
+  return Boolean(getSupabaseUrl() && getSupabaseKey());
 }
 
 /** Server-only client that bypasses RLS. Never expose to the browser. */
 export function getSupabaseAdmin(): SupabaseClient {
-  const url = cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL).replace(/\/$/, "");
-  const key = cleanEnvVal(process.env.SUPABASE_SERVICE_ROLE_KEY);
+  const url = getSupabaseUrl();
+  const key = getSupabaseKey();
 
-  if (!url || !key) {
+  if (!url || url.includes("xxxx.supabase.co")) {
     throw new Error(
-      "Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY."
+      "NEXT_PUBLIC_SUPABASE_URL is not set. Please add NEXT_PUBLIC_SUPABASE_URL=https://taywtlmjyjjirnkpucfm.supabase.co in Vercel Settings -> Environment Variables."
+    );
+  }
+
+  if (!key) {
+    throw new Error(
+      "SUPABASE_SERVICE_ROLE_KEY is missing in Vercel Environment Variables. Please add your Supabase service_role secret key in Vercel Settings."
     );
   }
 
