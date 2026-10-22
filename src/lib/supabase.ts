@@ -1,28 +1,37 @@
 import dns from "node:dns";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-dns.setDefaultResultOrder("ipv4first");
+if (typeof dns?.setDefaultResultOrder === "function" && process.platform === "win32") {
+  try {
+    dns.setDefaultResultOrder("ipv4first");
+  } catch {}
+}
 
 let adminClient: SupabaseClient | null = null;
 
-export function isSupabaseConfigured(): boolean {
-  return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-  );
+function cleanEnvVal(val: string | undefined): string {
+  if (!val) return "";
+  let s = val.trim();
+  if (
+    (s.startsWith('"') && s.endsWith('"')) ||
+    (s.startsWith("'") && s.endsWith("'"))
+  ) {
+    s = s.slice(1, -1).trim();
+  }
+  return s;
 }
 
-function supabaseFetch(
-  input: RequestInfo | URL,
-  init?: RequestInit
-): Promise<Response> {
-  return fetch(input, { ...init, cache: "no-store" });
+export function isSupabaseConfigured(): boolean {
+  return Boolean(
+    cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
+      cleanEnvVal(process.env.SUPABASE_SERVICE_ROLE_KEY)
+  );
 }
 
 /** Server-only client that bypasses RLS. Never expose to the browser. */
 export function getSupabaseAdmin(): SupabaseClient {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "");
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL).replace(/\/$/, "");
+  const key = cleanEnvVal(process.env.SUPABASE_SERVICE_ROLE_KEY);
 
   if (!url || !key) {
     throw new Error(
@@ -33,7 +42,6 @@ export function getSupabaseAdmin(): SupabaseClient {
   if (!adminClient) {
     adminClient = createClient(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
-      global: { fetch: supabaseFetch },
     });
   }
 
@@ -44,11 +52,17 @@ export function formatDbError(error: unknown): string {
   if (!error) return "Unknown database error";
   if (typeof error === "string") return error;
   if (error instanceof Error) {
-    const cause =
-      "cause" in error && error.cause instanceof Error
-        ? error.cause.message
-        : "";
-    return cause ? `${error.message} (${cause})` : error.message;
+    const cause = (error as { cause?: unknown }).cause;
+    let causeStr = "";
+    if (cause) {
+      causeStr =
+        cause instanceof Error
+          ? cause.message
+          : typeof cause === "object"
+          ? JSON.stringify(cause)
+          : String(cause);
+    }
+    return causeStr ? `${error.message} [cause: ${causeStr}]` : error.message;
   }
   if (typeof error === "object" && "message" in error) {
     return String((error as { message: unknown }).message);
