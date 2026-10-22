@@ -21,7 +21,7 @@ function cleanEnvVal(val: string | undefined): string {
   return s;
 }
 
-function getSupabaseUrl(): string {
+export function getSupabaseUrl(): string {
   let envUrl = cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL);
   if (envUrl.includes("image.png")) {
     envUrl = envUrl.replace(/image\.png.*$/i, "").trim();
@@ -40,8 +40,11 @@ function getSupabaseUrl(): string {
   return envUrl.replace(/\/$/, "");
 }
 
-function getSupabaseKey(): string {
-  const envKey = cleanEnvVal(process.env.SUPABASE_SERVICE_ROLE_KEY);
+export function getSupabaseKey(): string {
+  let envKey = cleanEnvVal(process.env.SUPABASE_SERVICE_ROLE_KEY);
+  if (envKey.includes("image.png")) {
+    envKey = envKey.replace(/image\.png.*$/i, "").trim();
+  }
   if (envKey && !envKey.startsWith("eyJhbGciOi...") && !envKey.includes("xxxxx")) {
     return envKey;
   }
