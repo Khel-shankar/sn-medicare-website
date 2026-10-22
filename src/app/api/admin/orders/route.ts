@@ -21,9 +21,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ orders });
   } catch (error) {
     const detail = formatDbError(error);
+    const dbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "NOT_SET";
+    const hasKey = Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
     console.error("List orders error:", detail);
     return NextResponse.json(
-      { error: "Failed to load orders", detail },
+      { error: "Failed to load orders", detail, dbUrl, hasKey },
       { status: 500 }
     );
   }
