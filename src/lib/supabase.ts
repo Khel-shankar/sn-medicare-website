@@ -22,11 +22,22 @@ function cleanEnvVal(val: string | undefined): string {
 }
 
 function getSupabaseUrl(): string {
-  const envUrl = cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL);
-  if (envUrl && !envUrl.includes("xxxx.supabase.co")) {
-    return envUrl.replace(/\/$/, "");
+  let envUrl = cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL);
+  if (envUrl.includes("image.png")) {
+    envUrl = envUrl.replace(/image\.png.*$/i, "").trim();
   }
-  return "https://taywtlmjyjjirnkpucfm.supabase.co";
+  if (envUrl.includes("taywtml")) {
+    envUrl = envUrl.replace("taywtml", "taywtlm");
+  }
+  if (
+    !envUrl ||
+    envUrl.includes("xxxx") ||
+    !envUrl.startsWith("https://") ||
+    !envUrl.includes(".supabase.co")
+  ) {
+    return "https://taywtlmjyjjirnkpucfm.supabase.co";
+  }
+  return envUrl.replace(/\/$/, "");
 }
 
 function getSupabaseKey(): string {
