@@ -47,12 +47,22 @@ export async function verifyAdminToken(
   }
 }
 
-export function adminCookieOptions(maxAgeSeconds = SESSION_DAYS * 24 * 60 * 60) {
+export function adminCookieOptions(
+  maxAgeSeconds = SESSION_DAYS * 24 * 60 * 60,
+  host?: string | null
+) {
+  const isSnMedicare = host
+    ? host.includes("snmedicare.in")
+    : Boolean(
+        process.env.NEXT_PUBLIC_SITE_URL?.includes("snmedicare.in") &&
+          process.env.NODE_ENV === "production"
+      );
   return {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax" as const,
     path: "/",
+    domain: isSnMedicare ? ".snmedicare.in" : undefined,
     maxAge: maxAgeSeconds,
   };
 }
@@ -72,10 +82,14 @@ export async function getAdminSessionFromRequest(
   return verifyAdminToken(token);
 }
 
-export function setAdminCookie(res: NextResponse, token: string) {
-  res.cookies.set(ADMIN_COOKIE, token, adminCookieOptions());
+export function setAdminCookie(
+  res: NextResponse,
+  token: string,
+  host?: string | null
+) {
+  res.cookies.set(ADMIN_COOKIE, token, adminCookieOptions(undefined, host));
 }
 
-export function clearAdminCookie(res: NextResponse) {
-  res.cookies.set(ADMIN_COOKIE, "", adminCookieOptions(0));
+export function clearAdminCookie(res: NextResponse, host?: string | null) {
+  res.cookies.set(ADMIN_COOKIE, "", adminCookieOptions(0, host));
 }

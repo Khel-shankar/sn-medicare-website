@@ -54,7 +54,8 @@ export default function AdminDashboardPage() {
       }
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Failed to load orders");
+        const msg = data.detail ? `${data.error}: ${data.detail}` : (data.error || "Failed to load orders");
+        setError(msg);
         setOrders([]);
         return;
       }

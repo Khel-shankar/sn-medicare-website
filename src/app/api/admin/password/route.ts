@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     });
 
     const res = NextResponse.json({ success: true });
-    setAdminCookie(res, token);
+    setAdminCookie(res, token, req.headers.get("host"));
     return res;
   } catch (error) {
     console.error("Password login error:", error);

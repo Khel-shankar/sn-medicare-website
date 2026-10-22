@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
     });
 
     const res = NextResponse.json({ success: true });
-    setAdminCookie(res, token);
+    setAdminCookie(res, token, req.headers.get("host"));
     res.cookies.set(OTP_COOKIE, "", { ...otpCookieOptions(), maxAge: 0 });
     return res;
   } catch (error) {

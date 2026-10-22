@@ -100,14 +100,25 @@ export async function saveVerifiedOrder(
 
 export async function listOrders(limit = 100): Promise<OrderRow[]> {
   const db = getSupabaseAdmin();
-  const { data, error } = await db
+  const res = await db
     .from("orders")
     .select("*, order_items(*)")
     .order("created_at", { ascending: false })
     .limit(limit);
 
-  if (error) throw new Error(error.message);
-  return (data || []) as OrderRow[];
+  if (res.error) {
+    console.warn("[orders] select with order_items failed, trying orders only:", res.error.message);
+    const fallback = await db
+      .from("orders")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(limit);
+    if (fallback.error) {
+      throw new Error(fallback.error.message);
+    }
+    return (fallback.data || []).map((o) => ({ ...o, order_items: [] })) as OrderRow[];
+  }
+  return (res.data || []) as OrderRow[];
 }
 
 export async function getOrderById(id: string): Promise<OrderRow | null> {
