@@ -23,15 +23,11 @@ function cleanEnvVal(val: string | undefined): string {
 
 export function getSupabaseUrl(): string {
   let envUrl = cleanEnvVal(process.env.NEXT_PUBLIC_SUPABASE_URL);
-  if (envUrl.includes("image.png")) {
-    envUrl = envUrl.replace(/image\.png.*$/i, "").trim();
-  }
-  if (envUrl.includes("taywtml")) {
-    envUrl = envUrl.replace("taywtml", "taywtlm");
-  }
   if (
     !envUrl ||
     envUrl.includes("xxxx") ||
+    envUrl.includes("image.png") ||
+    envUrl.includes("tayw") ||
     !envUrl.startsWith("https://") ||
     !envUrl.includes(".supabase.co")
   ) {
